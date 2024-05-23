@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Deepanshu blog | <%= title %>  </title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+    <nav>
+        <div class="logo"><h1>my blog</h1></div>
+        <div class="menu">
+            <h2><a href="/">my blogs</a></h2>
+            <h2><a href="/about">about us</a></h2>
+            <h2><a href="/blogs/create">create blog</a></h2>
+        </div>
+    </nav>
+    <main>
+        <div class="create content">
+            <h2>Create Your Blogs:</h2>
+            <form action="/myblogs" method="post">
+                <label for="title">Blog title:</label>
+                <input type="text" id="title" name="title">
+                <label for="snippet">Blog snippet:</label>
+                <input type="text" id="snippet" name="snippet">
+                <label for="body">Blog body:</label>
+                <textarea name="body" id="body" cols="40" rows="3"></textarea>
+                <button>submit</button>
+            </form>
+
+        </div>
+    </main>
+
+    <footer>
+        <h3>@copyright &copy;2024</h3>
+    </footer>
+</body>
+</html>

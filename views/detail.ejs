@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Deepanshu blog | <%= title %></title>
+    <link rel="stylesheet" href="/style.css" />
+  </head>
+  <body>
+    <nav>
+      <div class="logo"><h1>my blog</h1></div>
+      <div class="menu">
+        <h2><a href="/">my blogs</a></h2>
+        <h2><a href="/about">about us</a></h2>
+        <h2><a href="/blogs/create">create blog</a></h2>
+      </div>
+    </nav>
+    <main>
+      <div class="singleBLog content">
+        <h1><%= result.title %></h1>
+        <div class="data">
+          <!-- note: blogs is a list of object -->
+
+          <div class="oneblog">
+            <h2><%= result.snippet %>:</h2>
+            <h3><%= result.body %></h3>
+          </div>
+        </div>
+        <!-- delete button -->
+        <a class="delete" data-doc="<%= result._id%>">Delete</a>
+        <!-- data-doc is an attribute used to store some custom value
+        which can be retrieve later on by using following syntax:
+          anchorelement.dataset.doc .
+        note that:
+        this anchorelement should be selected in javascript by using queryselestor();
+        -->
+      </div>
+    </main>
+
+    <footer>
+      <h3>@copyright &copy;2024</h3>
+    </footer>
+
+    <script>
+      // javascript for sending request to server:
+      const dlt = document.querySelector("a.delete");
+      dlt.addEventListener("click", (e) => {
+        const path = `/myblogs/${dlt.dataset.doc}`;
+        // fetch method se humne ik request bheji iss path="/blog/${dlt.dataset.doc}" par.
+        // ye req jayegi app.delete par and match hone ke baad vo response bhejega.
+        fetch(path, {
+          method: "DELETE",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        })
+          .then((response) => {
+            if (!response.ok) {
+              throw new Error("was not ok");
+            } else {
+            // server  behjega ik path response . 
+             return response.json();
+            }
+        }
+        )
+          .then((data) => {
+            // window.location.href is a property in JavaScript that represents the complete URL of the current page. It allows you to get or set the URL, enabling you to navigate to a different page or retrieve information about the current URL.
+
+            // server ke bheje path ko hum set kr denge as current page url
+            //   so that hum us path pr chlje jiska response aya server se.
+            window.location.href = data.redirect;
+          })
+          .catch((error) => {
+            console.log(error._message);
+          });
+      });
+    </script>
+  </body>
+</html>

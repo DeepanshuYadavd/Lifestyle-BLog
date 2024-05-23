@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Deepanshu blog | <%= title %></title>
+    <link rel="stylesheet" href="/style.css" />
+  </head>
+  <body>
+    <nav>
+      <div class="logo"><h1>my blog</h1></div>
+      <div class="menu">
+        <h2><a href="/">my blogs</a></h2>
+        <h2><a href="/about">about us</a></h2>
+        <h2><a href="/blogs/create">create blog</a></h2>
+      </div>
+    </nav>
+    <main>
+      <div class="blogs content">
+        <h2>ALL BLOGS:</h2>
+        <div class="data">
+          <!-- note: blogs is a list of object -->
+          <% if(blogs.length>0) {%> <% blogs.forEach(blog => {%>
+          <div class="blogData">
+            <a href="/myblogs/<%=blog._id %>">
+              <h3><%= blog.title %></h3>
+              <p><%= blog.snippet %></p>
+            </a>
+          </div>
+          <% }); %> <% }else {%>
+          <h3>There is no blog</h3>
+          <%}%>
+        </div>
+      </div>
+    </main>
+
+    <footer>
+      <h3>@copyright &copy;2024</h3>
+    </footer>
+  </body>
+</html>
